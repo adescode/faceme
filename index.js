@@ -1,22 +1,22 @@
 'use strict';
 
 var os = require('os');
-var nodeStatic = require('node-static');
-var http = require('http');
-var socketIO = require('socket.io');
-var host = '127.0.0.1';
+var express = require('express');
+var app = express();
+var path = require('path');
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
 
-var fileServer = new nodeStatic.Server();
-var app = http
-  .createServer(function (req, res) {
-    fileServer.serve(req, res);
-  })
-  .listen(port, host, () => {
-    console.log(`Server running at.. http://${host}:${port}/`);
-  });
+server.listen(port, () => {
+  console.log('Server listening at port %d', port);
+});
 
-var io = socketIO.listen(app);
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+// var io = socketIO.listen(app);
 io.sockets.on('connection', function (socket) {
   // convenience function to log server messages on the client
   function log() {
