@@ -12,9 +12,8 @@ server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
+// Routing
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 // var io = socketIO.listen(app);
 io.sockets.on('connection', function (socket) {
