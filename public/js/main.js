@@ -21,11 +21,11 @@ var pcConfig = {
       urls: 'stun:stun4.l.google.com:19305',
       // urls: 'stun:stun.services.mozilla.com',
     },
-    {
-      urls: 'turn:numb.viagenie.ca',
-      credential: 'TkLK99Fe!WLdXnk',
-      username: 'adelaja444@gmail.com',
-    },
+    // {
+    //   urls: 'turn:numb.viagenie.ca',
+    //   credential: 'TkLK99Fe!WLdXnk',
+    //   username: 'adelaja444@gmail.com',
+    // },
   ],
 };
 
