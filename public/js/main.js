@@ -13,6 +13,19 @@ var pcConfig = {
     {
       urls: 'stun:stun.l.google.com:19302',
     },
+    { urls: 'stun:stun.l.google.com:19305' },
+    { urls: 'stun:stun1.l.google.com:19305' },
+    { urls: 'stun:stun2.l.google.com:19305' },
+    { urls: 'stun:stun3.l.google.com:19305' },
+    {
+      urls: 'stun:stun4.l.google.com:19305',
+      // urls: 'stun:stun.services.mozilla.com',
+    },
+    {
+      urls: 'turn:numb.viagenie.ca',
+      credential: 'TkLK99Fe!WLdXnk',
+      username: 'adelaja444@gmail.com',
+    },
   ],
 };
 
@@ -209,7 +222,10 @@ function onCreateSessionDescriptionError(error) {
 
 function requestTurn(turnURL) {
   var turnExists = false;
+  console.log('pcConfig.iceServers');
   for (var i in pcConfig.iceServers) {
+    console.log('pcConfig.iceServers', pcConfig.iceServers[i]);
+
     if (pcConfig.iceServers[i].urls.substr(0, 5) === 'turn:') {
       turnExists = true;
       turnReady = true;
