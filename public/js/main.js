@@ -43,9 +43,13 @@ room = prompt('Enter room name:');
 
 var socket = io.connect();
 
-if (room !== '') {
+if (room !== '' && room !== null) {
+  startDevices();
   socket.emit('create or join', room);
   console.log('Attempted to create or  join room', room);
+} else {
+  window.alert('Room name is need to continue');
+  window.location.reload();
 }
 
 socket.on('created', function (room) {
@@ -108,15 +112,17 @@ socket.on('message', function (message) {
 var localVideo = document.querySelector('#localVideo');
 var remoteVideo = document.querySelector('#remoteVideo');
 
-navigator.mediaDevices
-  .getUserMedia({
-    audio: true,
-    video: true,
-  })
-  .then(gotStream)
-  .catch(function (e) {
-    alert('getUserMedia() error: ' + e.name);
-  });
+function startDevices() {
+  navigator.mediaDevices
+    .getUserMedia({
+      audio: true,
+      video: true,
+    })
+    .then(gotStream)
+    .catch(function (e) {
+      alert('getUserMedia() error: ' + e.name);
+    });
+}
 
 function gotStream(stream) {
   console.log('Adding local stream.');
@@ -167,7 +173,7 @@ window.onbeforeunload = function () {
 
 function createPeerConnection() {
   try {
-    pc = new RTCPeerConnection(null);
+    pc = new RTCPeerConnection(pcConfig);
     pc.onicecandidate = handleIceCandidate;
     pc.onaddstream = handleRemoteStreamAdded;
     pc.onremovestream = handleRemoteStreamRemoved;
