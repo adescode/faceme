@@ -297,6 +297,7 @@ function handleRemoteStreamAdded(event) {
   remoteStream = event.stream;
   remoteVideo.srcObject = localStream;
   localVideo.srcObject = remoteStream;
+  localVideo.muted = !localVideo.muted;
 }
 
 function handleRemoteStreamRemoved(event) {
