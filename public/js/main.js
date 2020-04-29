@@ -266,8 +266,6 @@ function requestTurn(turnURL) {
   var turnExists = false;
   console.log('pcConfig.iceServers');
   for (var i in pcConfig.iceServers) {
-    console.log('pcConfig.iceServers', pcConfig.iceServers[i]);
-
     if (pcConfig.iceServers[i].urls.substr(0, 5) === 'turn:') {
       turnExists = true;
       turnReady = true;
