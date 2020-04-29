@@ -297,7 +297,8 @@ function requestTurn(turnURL) {
 function handleRemoteStreamAdded(event) {
   console.log('Remote stream added.');
   remoteStream = event.stream;
-  remoteVideo.srcObject = remoteStream;
+  remoteVideo.srcObject = localStream;
+  localVideo.srcObject = remoteStream;
 }
 
 function handleRemoteStreamRemoved(event) {
