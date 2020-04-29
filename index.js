@@ -15,8 +15,8 @@ server.listen(port, () => {
 // Routing
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-// var io = socketIO.listen(app);
 io.sockets.on('connection', function (socket) {
+  
   // convenience function to log server messages on the client
   function log() {
     var array = ['Message from server:'];
@@ -28,6 +28,7 @@ io.sockets.on('connection', function (socket) {
     log('Client said: ', message);
     // for a real app, would be room-only (not broadcast)
     socket.broadcast.emit('message', message);
+    // socket.emit('message', message);
   });
 
   socket.on('create or join', function (room) {

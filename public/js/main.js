@@ -1,5 +1,6 @@
 'use strict';
 
+// default declaration
 var isChannelReady = false;
 var isInitiator = false;
 var isStarted = false;
@@ -8,6 +9,12 @@ var pc;
 var remoteStream;
 var turnReady;
 
+var socket = io.connect();
+
+var $window = $(window);
+var $loginPage = $('.login.page'); // The login page
+
+//iceServers using numb.viagenie.ca for turn server
 var pcConfig = {
   iceServers: [
     {
@@ -28,28 +35,58 @@ var pcConfig = {
     },
   ],
 };
+/////////////////////////////////////////////
 
 // Set up audio and video regardless of what devices are present.
 var sdpConstraints = {
   offerToReceiveAudio: true,
   offerToReceiveVideo: true,
 };
+/////////////////////////////////////////////
+
+let localVideo = document.querySelector('#localVideo');
+let remoteVideo = document.querySelector('#remoteVideo');
+let closeButton = document.getElementById('closeButton');
+let room = document.getElementById('room');
+// let roomInput = room.value;
+
+closeButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  hangup();
+  // window.location.reload();
+});
 
 /////////////////////////////////////////////
 
-var room;
-// Could prompt for room name:
-room = prompt('Enter room name:');
+// Keyboard events
 
-var socket = io.connect();
+$window.keydown((event) => {
+  // Auto-focus the current input when a key is typed
+  if (!(event.ctrlKey || event.metaKey || event.altKey)) {
+    room.focus();
+  }
+  // When the client hits ENTER on their keyboard
+  if (event.which === 13) {
+    closeRoomInput();
+  }
+});
 
-if (room !== '' && room !== null) {
-  startDevices();
-  socket.emit('create or join', room);
-  console.log('Attempted to create or  join room', room);
-} else {
-  window.alert('Room name is need to continue');
-  window.location.reload();
+// Prevents input from having injected markup
+const cleanInput = (input) => {
+  return $('<div/>').text(input).html();
+};
+
+function closeRoomInput() {
+  let roomInput = document.getElementById('room').value;
+  // If the room is valid
+  if (roomInput !== '' && roomInput !== null) {
+    startDevices();
+    socket.emit('create or join', roomInput);
+    console.log('Attempted to create or  join room', roomInput);
+    $loginPage.fadeOut();
+    // $chatPage.show();
+    $loginPage.off('click');
+  }
 }
 
 socket.on('created', function (room) {
@@ -109,9 +146,6 @@ socket.on('message', function (message) {
 
 ////////////////////////////////////////////////////
 
-var localVideo = document.querySelector('#localVideo');
-var remoteVideo = document.querySelector('#remoteVideo');
-
 function startDevices() {
   navigator.mediaDevices
     .getUserMedia({
@@ -128,6 +162,8 @@ function gotStream(stream) {
   console.log('Adding local stream.');
   localStream = stream;
   localVideo.srcObject = stream;
+  // remoteVideo.srcObject = localStream;
+  closeButton.style.display = 'block';
   sendMessage('got user media');
   if (isInitiator) {
     maybeStart();
@@ -281,7 +317,11 @@ function handleRemoteHangup() {
 }
 
 function stop() {
-  isStarted = false;
-  pc.close();
-  pc = null;
+  closeButton.style.display = 'none';
+  window.location.reload();
+  if (pc) {
+    isStarted = false;
+    pc.close();
+    pc = null;
+  }
 }

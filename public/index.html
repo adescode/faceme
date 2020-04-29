@@ -3,21 +3,47 @@
 
 <head>
 
-  <title>Realtime communication with WebRTC</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FaceToFace</title>
 
-  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/normalize.css" />
 
 </head>
 
 <body>
 
-  <h1>Realtime communication with WebRTC</h1>
+  <div class="container">
 
-  <div id="videos">
-    <video id="localVideo" autoplay muted playsinline></video>
-    <video id="remoteVideo" autoplay playsinline></video>
+    <!-- <div></div> -->
+    <div class="video-container1">
+      <video class="video1" id="localVideo" autoplay muted playsinline></video>
+
+      <div class="video-container2">
+        <video class="video2" id="remoteVideo" autoplay muted playsinline></video>
+      </div>
+
+      <div class="control" id="controls">
+        <!-- <div class="video-control"> -->
+          <a id="closeButton" href="/" class="fa fa-close"></a>
+        <!-- </div> -->
+      </div>
+    </div>
+
+  </div>
+  <div class="login page">
+    <div class="form">
+      <h3 class="title">Enter room name</h3>
+      <input id="room" class="usernameInput" type="text" maxlength="10" />
+    </div>
   </div>
 
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- This file is automatically added/served when running "node index.js". -->
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
