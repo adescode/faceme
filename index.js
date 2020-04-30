@@ -16,6 +16,7 @@ server.listen(port, () => {
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 io.sockets.on('connection', function (socket) {
+  // console.log(socket.id, "connected!");
   
   // convenience function to log server messages on the client
   function log() {
@@ -25,10 +26,17 @@ io.sockets.on('connection', function (socket) {
   }
 
   socket.on('message', function (message) {
+    // console.log(message);
+    
     log('Client said: ', message);
     // for a real app, would be room-only (not broadcast)
+    // io.sockets.in('aaa').emit('message', message);
     socket.broadcast.emit('message', message);
     // socket.emit('message', message);
+  });
+
+  socket.on('chat message', (msg) => {
+    io.sockets.in('aaa').emit('chat message', msg);
   });
 
   socket.on('create or join', function (room) {
@@ -50,6 +58,8 @@ io.sockets.on('connection', function (socket) {
       socket.join(room);
       socket.emit('joined', room, socket.id);
       io.sockets.in(room).emit('ready');
+      console.log("numClients", numClients, clientsInRoom.sockets);
+      
     } else {
       // max two clients
       socket.emit('full', room);

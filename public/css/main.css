@@ -11,6 +11,47 @@ body {
   margin: 0 auto;
 }
 
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  position: absolute;
+  bottom: 30px;
+  max-height: 40%;
+  max-width: 40%;
+  margin: 0;
+  padding: 0;
+  z-index: 4;
+  
+}
+
+.chat-message-list {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+ul.striped-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul.striped-list > li {
+  border-bottom: 1px solid rgb(221,221,221);
+  padding: 6px;
+}
+ul.striped-list > li:nth-of-type(odd) {
+  background-color: #e9e9f9 ;
+}
+ul.striped-list > li:last-child {
+  border-bottom: none;
+}
+
+.chat-input {
+  width: 100%;
+}
+
+
 .video-container1 {
   position: absolute;
   top: 0;
@@ -26,7 +67,6 @@ body {
   margin: 0 auto;
   padding: 0;
 }
-
 
 .video-container1 .video1 {
   min-width: 100%;
@@ -100,9 +140,9 @@ body {
   z-index: 4;
 }
 
- /* Login Page */
-  
- .login.page {
+/* Login Page */
+
+.login.page {
   background-color: #000;
 }
 
@@ -136,7 +176,8 @@ body {
   letter-spacing: 3px;
 }
 
-.login.page .title, .login.page .usernameInput {
+.login.page .title,
+.login.page .usernameInput {
   color: #fff;
   font-weight: 100;
 }
@@ -151,8 +192,8 @@ body {
     max-width: 600px;
     min-width: 600px;
     height: 100%;
-     /* background-color:blue;  */
-     /* overflow-y: scroll; */
+    /* background-color:blue;  */
+    /* overflow-y: scroll; */
     /* margin-left: 9%; */
   }
 
@@ -169,7 +210,6 @@ body {
     height: auto;
   }
 
-  
   /* .control {
     margin-right: 9%;
   } */

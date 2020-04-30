@@ -28,9 +28,22 @@
 
       <div class="control" id="controls">
         <!-- <div class="video-control"> -->
-          <a id="closeButton" href="/" class="fa fa-close"></a>
+        <a id="closeButton" href="/" class="fa fa-close"></a>
         <!-- </div> -->
       </div>
+
+      <div class="chat-message">
+        <div id="chatMessageList" class="chat-message-list">
+          <ul class="striped-list messages" id="messages"></ul>
+        </div>
+        <div class="chat-input">
+          <form action="">
+            <input style="width: 70%;" id="m" autocomplete="off" /><button style="width: 30%;">Send</button>
+          </form>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
@@ -48,7 +61,6 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
   <script src="js/main.js"></script>
-
 </body>
 
 </html>

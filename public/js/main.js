@@ -12,7 +12,11 @@ var turnReady;
 var socket = io.connect();
 
 var $window = $(window);
+var $m = $('#m');
 var $loginPage = $('.login.page'); // The login page
+var $inputMessage = $('.inputMessage'); // Input message input box
+var $usernameInput = $('.usernameInput'); // Input for username
+var $currentInput = $usernameInput.focus();
 
 //iceServers using numb.viagenie.ca for turn server
 var pcConfig = {
@@ -67,7 +71,20 @@ $window.keydown((event) => {
   }
   // When the client hits ENTER on their keyboard
   if (event.which === 13) {
-    closeRoomInput();
+    if (pc) {
+      // alert('pc')
+      $('form').submit(function (e) {
+        e.preventDefault(); // prevents page reloading
+        if ($('#m').val() !== '' && $('#m').val() !== null) {
+          socket.emit('chat message', $('#m').val());
+        }
+        $('#m').val('');
+        return false;
+      });
+    } else {
+      // alert('closeinput')
+      closeRoomInput();
+    }
   }
 });
 
@@ -88,6 +105,12 @@ function closeRoomInput() {
     $loginPage.off('click');
   }
 }
+
+socket.on('chat message', function (msg) {
+  var divObj = document.getElementById('chatMessageList');
+  $('#messages').append($('<li>').text(msg));
+  divObj.scrollTop = divObj.scrollHeight;
+});
 
 socket.on('created', function (room) {
   console.log('Created room ' + room);
@@ -317,9 +340,9 @@ function handleRemoteHangup() {
 }
 
 function stop() {
+  closeButton.style.display = 'none';
+  window.location.reload();
   if (pc) {
-    closeButton.style.display = 'none';
-    window.location.reload();
     isStarted = false;
     pc.close();
     pc = null;
