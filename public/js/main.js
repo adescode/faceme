@@ -317,9 +317,9 @@ function handleRemoteHangup() {
 }
 
 function stop() {
-  closeButton.style.display = 'none';
-  window.location.reload();
   if (pc) {
+    closeButton.style.display = 'none';
+    window.location.reload();
     isStarted = false;
     pc.close();
     pc = null;
