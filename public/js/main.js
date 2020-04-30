@@ -72,11 +72,10 @@ $window.keydown((event) => {
   // When the client hits ENTER on their keyboard
   if (event.which === 13) {
     if (pc) {
-      // alert('pc')
       $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         if ($('#m').val() !== '' && $('#m').val() !== null) {
-          socket.emit('chat message', {msg:$('#m').val(), room: room.value});
+          socket.emit('chat message', { msg: $('#m').val(), room: room.value });
         }
         $('#m').val('');
         return false;
@@ -86,6 +85,18 @@ $window.keydown((event) => {
       closeRoomInput();
     }
   }
+});
+
+$('form').submit(function (e) {
+  e.preventDefault(); // prevents page reloading
+  if (pc) {
+    if ($('#m').val() !== '' && $('#m').val() !== null) {
+      socket.emit('chat message', { msg: $('#m').val(), room: room.value });
+    }
+  }
+
+  $('#m').val('');
+  return false;
 });
 
 // Prevents input from having injected markup
