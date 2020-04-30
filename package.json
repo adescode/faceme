@@ -1,7 +1,7 @@
 {
   "name": "Faceme",
   "version": "0.0.1",
-  "description": "WebRTC codelab",
+  "description": "WebRTC video call",
   "engines": {
     "node": "10.x"
   },
