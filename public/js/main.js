@@ -76,7 +76,7 @@ $window.keydown((event) => {
       $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         if ($('#m').val() !== '' && $('#m').val() !== null) {
-          socket.emit('chat message', {msg:$('#m').val(), room});
+          socket.emit('chat message', {msg:$('#m').val(), room: room.value});
         }
         $('#m').val('');
         return false;
