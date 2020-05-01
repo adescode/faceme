@@ -78,6 +78,7 @@ input.chat-input {
   border-bottom: 2px solid #040000;
   background-color: #f9f7f73d;
   width: 70%;
+  outline: none;
 }
 
 button.chat-send-button {
@@ -88,6 +89,7 @@ button.chat-send-button {
   border-bottom: 2px solid #040000;
   border-left: 2px solid #040000;
   background-color: #f9f7f73d;
+  outline: none;
 }
 
 .video-container1 {
@@ -99,7 +101,6 @@ button.chat-send-button {
   max-width: 600px;
   width: 100%;
   height: 100%;
-  /* background-color:blue; */
   overflow: hidden;
   z-index: 1;
   margin: 0 auto;
@@ -124,8 +125,6 @@ button.chat-send-button {
   margin: 0;
   min-width: 40%;
   min-height: 40%;
-  /* border: 2px solid black; */
-  /* background-color:red; */
   overflow: hidden;
   z-index: 2;
 }
