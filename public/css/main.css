@@ -117,15 +117,29 @@ button.chat-send-button {
   -moz-transform: rotateY(180deg) translate(25%, 0%);
 }
 
-.video-container2 {
+.video-container2, .video-container3 {
   position: absolute;
   top: 0;
-  left: 0;
   padding: 0;
   margin: 0;
+  min-width: 40%;
+  min-height: 40%;
+  /* border: 2px solid black; */
   /* background-color:red; */
   overflow: hidden;
   z-index: 2;
+}
+.video-container3 {
+  right: 0;
+}
+
+.video-container2 .video2{
+  float: left;
+  transition: ease-in;
+}
+.video-container3 .video2{
+  float: right;
+  transition: ease-in;
 }
 
 .video-container1 .video2 {

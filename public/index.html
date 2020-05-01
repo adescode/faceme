@@ -12,6 +12,22 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/normalize.css" />
 
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+  </script>
+
 </head>
 
 <body>
@@ -19,11 +35,16 @@
   <div class="container">
 
     <!-- <div></div> -->
-    <div class="video-container1">
+    <div id="videoContainer1" class="video-container1">
       <video class="video1" id="localVideo" autoplay muted playsinline></video>
 
-      <div class="video-container2">
-        <video class="video2" id="remoteVideo" autoplay muted playsinline></video>
+      <div id="videoContainer2" class="video-container2" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+      </div>
+
+      <div id="videoContainer3" class="video-container3" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <video class="video2" id="remoteVideo" draggable="true" ondragstart="drag(event)" autoplay muted
+          playsinline></video>
       </div>
 
       <div class="control" id="controls">
