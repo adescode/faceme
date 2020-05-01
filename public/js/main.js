@@ -1,25 +1,26 @@
 'use strict';
 
 // default declaration
-var isChannelReady = false;
-var isInitiator = false;
-var isStarted = false;
-var localStream;
-var pc;
-var remoteStream;
-var turnReady;
+let isChannelReady = false;
+let isInitiator = false;
+let isStarted = false;
+let localStream;
+let pc;
+let remoteStream;
+let turnReady;
+let myID;
 
-var socket = io.connect();
+let socket = io.connect();
 
-var $window = $(window);
-var $m = $('#m');
-var $loginPage = $('.login.page'); // The login page
-var $inputMessage = $('.inputMessage'); // Input message input box
-var $usernameInput = $('.usernameInput'); // Input for username
-var $currentInput = $usernameInput.focus();
+let $window = $(window);
+let $m = $('#m');
+let $loginPage = $('.login.page'); // The login page
+let $inputMessage = $('.inputMessage'); // Input message input box
+let $usernameInput = $('.usernameInput'); // Input for username
+let $currentInput = $usernameInput.focus();
 
 //iceServers using numb.viagenie.ca for turn server
-var pcConfig = {
+let pcConfig = {
   iceServers: [
     {
       urls: 'stun:stun.l.google.com:19302',
@@ -42,7 +43,7 @@ var pcConfig = {
 /////////////////////////////////////////////
 
 // Set up audio and video regardless of what devices are present.
-var sdpConstraints = {
+let sdpConstraints = {
   offerToReceiveAudio: true,
   offerToReceiveVideo: true,
 };
@@ -118,13 +119,17 @@ function closeRoomInput() {
 }
 
 socket.on('chat message', function (msg) {
-  var divObj = document.getElementById('chatMessageList');
-  $('#messages').append($('<li>').text(msg));
+  console.log("'chat message', function (msg) ", msg);
+  
+  let divObj = document.getElementById('chatMessageList');
+  const mssg = msg.id === myID ? `You: ${msg.msg}`:`Friend: ${msg.msg}`
+  $('#messages').append($('<li>').text(mssg));
   divObj.scrollTop = divObj.scrollHeight;
 });
 
-socket.on('created', function (room) {
-  console.log('Created room ' + room);
+socket.on('created', function (room, id) {
+  console.log('Created room ' + room + id);
+  myID = id;
   isInitiator = true;
 });
 
@@ -138,13 +143,14 @@ socket.on('join', function (room) {
   isChannelReady = true;
 });
 
-socket.on('joined', function (room) {
-  console.log('joined: ' + room);
+socket.on('joined', function (room, id) {
+  console.log('joined: ' + room, id);
+  myID = id
   isChannelReady = true;
 });
 
 socket.on('log', function (array) {
-  console.log.apply(console, array);
+  // console.log.apply(console, array);
 });
 
 ////////////////////////////////////////////////
@@ -332,6 +338,7 @@ function handleRemoteStreamAdded(event) {
   remoteVideo.srcObject = localStream;
   localVideo.srcObject = remoteStream;
   localVideo.muted = !localVideo.muted;
+  $('#messageDiv').css('display', 'flex');
 }
 
 function handleRemoteStreamRemoved(event) {

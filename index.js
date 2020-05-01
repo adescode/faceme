@@ -36,7 +36,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('chat message', (msg) => {
-    io.sockets.in(msg.room).emit('chat message', msg.msg);
+    io.sockets.in(msg.room).emit('chat message', {msg: msg.msg, id: socket.id});
   });
 
   socket.on('create or join', function (room) {
