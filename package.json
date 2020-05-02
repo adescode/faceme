@@ -9,13 +9,16 @@
   "scripts": {
     "start": "node index.js",
     "test": "node test.js",
-    "livelog": "heroku logs --tail"
+    "livelog": "heroku logs --tail",
+    "minifyJS": "uglifyjs main.js --compress --mangle --warn --output main.min.js",
+    "production": "npm run version:bump --silent && rm -f main.min.js && npm run minifyJS --silent && npm run version:add --silent"
   },
   "dependencies": {
     "express": "^4.17.1",
     "node-static": "^0.7.10",
     "path": "^0.12.7",
     "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.0"
+    "socket.io-client": "^2.3.0",
+    "uglify-js": "^3.9.1"
   }
 }

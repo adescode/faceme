@@ -1,4 +1,6 @@
-### Real Time Video call using Webrtc and socket.io
+### FacePeer
+
+## Real Time Video call using Webrtc and socket.io
 
  - [RTCPeerConnection](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection)
  - [RTCDataChannel](https://developer.mozilla.org/en-US/docs/Web/API/RTCDataChannel)
