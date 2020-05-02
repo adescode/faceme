@@ -15,9 +15,9 @@ server.listen(port, () => {
 
 // Routing
 // if (PROD) {
-//   app.use('/', express.static(path.join(__dirname, 'dist')));
+  app.use('/', express.static(path.join(__dirname, 'dist')));
 // }else{
-  app.use('/', express.static(path.join(__dirname, 'public')));
+  // app.use('/', express.static(path.join(__dirname, 'public')));
 // }
 
 io.sockets.on('connection', function (socket) {
