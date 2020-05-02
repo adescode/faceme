@@ -14,11 +14,11 @@ server.listen(port, () => {
 });
 
 // Routing
-if (!PROD) {
-  app.use('/', express.static(path.join(__dirname, 'dist')));
-}else{
+// if (PROD) {
+//   app.use('/', express.static(path.join(__dirname, 'dist')));
+// }else{
   app.use('/', express.static(path.join(__dirname, 'public')));
-}
+// }
 
 io.sockets.on('connection', function (socket) {
   // console.log(socket.id, "connected!");
