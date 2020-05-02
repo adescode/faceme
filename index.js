@@ -14,7 +14,7 @@ server.listen(port, () => {
 });
 
 // Routing
-if (PROD) {
+if (!PROD) {
   app.use('/', express.static(path.join(__dirname, 'dist')));
 }else{
   app.use('/', express.static(path.join(__dirname, 'public')));

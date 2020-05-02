@@ -1,6 +1,7 @@
-var minutesLabel = document.getElementById('minutes');
-var secondsLabel = document.getElementById('seconds');
-var totalSeconds = 0;
+let minutesLabel = document.getElementById('minutes');
+let secondsLabel = document.getElementById('seconds');
+
+let totalSeconds = 0;
 
 function setTime() {
   ++totalSeconds;
@@ -13,10 +14,13 @@ function startTimer() {
 }
 
 function pad(val) {
-  var valString = val + '';
+  let valString = val + '';
   if (valString.length < 2) {
     return '0' + valString;
   } else {
     return valString;
   }
 }
+
+export default startTimer;
+

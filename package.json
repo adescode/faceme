@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "webpack && node index.js",
     "test": "node test.js",
     "livelog": "heroku logs --tail",
     "build": "webpack"

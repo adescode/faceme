@@ -2,7 +2,7 @@
 
 import '../css/main.css';
 import '../css/normalize.css';
-import './timer.js';
+import startTimer from './timer.js';
 
 // default declaration
 let isChannelReady = false;
@@ -131,7 +131,7 @@ function drag(ev) {
 
 function drop(ev) {
   ev.preventDefault();
-  var data = ev.dataTransfer.getData('text');
+  let data = ev.dataTransfer.getData('text');
   ev.target.appendChild(document.getElementById(data));
 }
 
@@ -197,7 +197,7 @@ socket.on('message', function (message) {
   } else if (message.type === 'answer' && isStarted) {
     pc.setRemoteDescription(new RTCSessionDescription(message));
   } else if (message.type === 'candidate' && isStarted) {
-    var candidate = new RTCIceCandidate({
+    let candidate = new RTCIceCandidate({
       sdpMLineIndex: message.label,
       candidate: message.candidate,
     });
@@ -233,7 +233,7 @@ function gotStream(stream) {
   }
 }
 
-var constraints = {
+let constraints = {
   video: true,
 };
 
@@ -326,9 +326,9 @@ function onCreateSessionDescriptionError(error) {
 }
 
 function requestTurn(turnURL) {
-  var turnExists = false;
+  let turnExists = false;
   console.log('pcConfig.iceServers');
-  for (var i in pcConfig.iceServers) {
+  for (let i in pcConfig.iceServers) {
     if (pcConfig.iceServers[i].urls.substr(0, 5) === 'turn:') {
       turnExists = true;
       turnReady = true;
@@ -338,10 +338,10 @@ function requestTurn(turnURL) {
   if (!turnExists) {
     console.log('Getting TURN server from ', turnURL);
     // No TURN server. Get one from computeengineondemand.appspot.com:
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        var turnServer = JSON.parse(xhr.responseText);
+        let turnServer = JSON.parse(xhr.responseText);
         console.log('Got TURN server: ', turnServer);
         pcConfig.iceServers.push({
           urls: 'turn:' + turnServer.username + '@' + turnServer.turn,
