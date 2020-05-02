@@ -21,7 +21,7 @@ server.listen(port, () => {
 // }
 
 io.sockets.on('connection', function (socket) {
-  // console.log(socket.id, "connected!");
+  console.log(socket.id, "connected!");
 
   // convenience function to log server messages on the client
   function log() {
@@ -45,7 +45,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('create or join', function (room) {
-    log('Received request to create or join room ' + room);
+    console.log('Received request to create or join room ' + room);
 
     var clientsInRoom = io.sockets.adapter.rooms[room];
     var numClients = clientsInRoom
