@@ -1,5 +1,8 @@
 'use strict';
 
+import '../css/main.css';
+import '../css/normalize.css';
+
 // default declaration
 let isChannelReady = false;
 let isInitiator = false;
@@ -18,6 +21,8 @@ let $loginPage = $('.login.page'); // The login page
 let $inputMessage = $('.inputMessage'); // Input message input box
 let $usernameInput = $('.usernameInput'); // Input for username
 let $currentInput = $usernameInput.focus();
+console.log(window);
+
 
 //iceServers using numb.viagenie.ca for turn server
 let pcConfig = {
@@ -52,6 +57,8 @@ let sdpConstraints = {
 let localVideo = document.querySelector('#localVideo');
 let remoteVideo = document.querySelector('#remoteVideo');
 let closeButton = document.getElementById('closeButton');
+let videoContainer2 = document.getElementById('videoContainer2');
+let videoContainer3 = document.getElementById('videoContainer3');
 let room = document.getElementById('room');
 // let roomInput = room.value;
 
@@ -100,11 +107,6 @@ $('form').submit(function (e) {
   return false;
 });
 
-// Prevents input from having injected markup
-const cleanInput = (input) => {
-  return $('<div/>').text(input).html();
-};
-
 function closeRoomInput() {
   let roomInput = document.getElementById('room').value;
   // If the room is valid
@@ -118,11 +120,31 @@ function closeRoomInput() {
   }
 }
 
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData('text', ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData('text');
+  ev.target.appendChild(document.getElementById(data));
+}
+
+videoContainer2.addEventListener('drop', drop);
+videoContainer3.addEventListener('drop', drop);
+videoContainer2.addEventListener('dragover', allowDrop);
+videoContainer3.addEventListener('dragover', allowDrop);
+remoteVideo.addEventListener('dragstart', drag);
+
 socket.on('chat message', function (msg) {
   console.log("'chat message', function (msg) ", msg);
-  
+
   let divObj = document.getElementById('chatMessageList');
-  const mssg = msg.id === myID ? `You: ${msg.msg}`:`Friend: ${msg.msg}`
+  const mssg = msg.id === myID ? `You: ${msg.msg}` : `Friend: ${msg.msg}`;
   $('#messages').append($('<li>').text(mssg));
   divObj.scrollTop = divObj.scrollHeight;
 });
@@ -145,7 +167,7 @@ socket.on('join', function (room) {
 
 socket.on('joined', function (room, id) {
   console.log('joined: ' + room, id);
-  myID = id
+  myID = id;
   isChannelReady = true;
 });
 

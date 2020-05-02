@@ -7,13 +7,18 @@ var path = require('path');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
+const PROD = process.env.NODE_ENV === 'production';
 
 server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
 
 // Routing
-app.use('/', express.static(path.join(__dirname, 'public')));
+if (PROD) {
+  app.use('/', express.static(path.join(__dirname, 'dist')));
+}else{
+  app.use('/', express.static(path.join(__dirname, 'public')));
+}
 
 io.sockets.on('connection', function (socket) {
   // console.log(socket.id, "connected!");
