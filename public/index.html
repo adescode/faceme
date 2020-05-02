@@ -44,10 +44,12 @@
         <video class="video2" id="remoteVideo" draggable="true" autoplay muted playsinline></video>
       </div>
 
+      <div class="timer" id="timer">
+        <label id="minutes" class="minutes">00</label><label class="colon">:</label><label id="seconds" class="seconds">00</label>
+      </div>
+
       <div class="control" id="controls">
-        <!-- <div class="video-control"> -->
         <a id="closeButton" href="/" class="fa fa-close"></a>
-        <!-- </div> -->
       </div>
 
       <div id="messageDiv" class="message-div">
@@ -69,7 +71,7 @@
   <div class="login page">
     <div class="form">
       <h3 class="title">Enter room name</h3>
-      <label style="display:none" for="room">Enter room names</label>
+      <label style="display:none;" for="room">Enter room names</label>
       <input id="room" class="usernameInput" type="text" maxlength="10" />
 
     </div>
@@ -82,6 +84,7 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/timer.js"></script>
 </body>
 
 </html>

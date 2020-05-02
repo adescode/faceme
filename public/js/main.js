@@ -2,6 +2,7 @@
 
 import '../css/main.css';
 import '../css/normalize.css';
+import './timer.js';
 
 // default declaration
 let isChannelReady = false;
@@ -361,6 +362,8 @@ function handleRemoteStreamAdded(event) {
   localVideo.srcObject = remoteStream;
   localVideo.muted = !localVideo.muted;
   $('#messageDiv').css('display', 'flex');
+  $('#timer').css('display', 'flex');
+  startTimer();
 }
 
 function handleRemoteStreamRemoved(event) {
