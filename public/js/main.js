@@ -22,7 +22,6 @@ let $loginPage = $('.login.page'); // The login page
 let $inputMessage = $('.inputMessage'); // Input message input box
 let $usernameInput = $('.usernameInput'); // Input for username
 let $currentInput = $usernameInput.focus();
-console.log(window);
 
 
 //iceServers using numb.viagenie.ca for turn server
@@ -116,7 +115,7 @@ function closeRoomInput() {
     socket.emit('create or join', roomInput);
     console.log('Attempted to create or  join room', roomInput);
     $loginPage.fadeOut();
-    // $chatPage.show();
+    $('.container').show();
     $loginPage.off('click');
   }
 }
@@ -268,6 +267,11 @@ window.onbeforeunload = function () {
   sendMessage('bye');
 };
 
+$(document).ready(function() {
+   $('.preloader').fadeOut('slow');
+   $loginPage.show()
+  });
+
 /////////////////////////////////////////////////////////
 
 function createPeerConnection() {
@@ -363,6 +367,8 @@ function handleRemoteStreamAdded(event) {
   localVideo.muted = !localVideo.muted;
   $('#messageDiv').css('display', 'flex');
   $('#timer').css('display', 'flex');
+  $('#container').css('display', 'block');
+  
   startTimer();
 }
 

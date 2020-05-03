@@ -4,7 +4,6 @@ body {
 }
 
 .container {
-  display: block;
   width: 100%;
   height: auto;
   background-color: #000;
@@ -246,26 +245,16 @@ button.chat-send-button {
 }
 
 @media only screen and (min-width: 800px) {
-  /* .container{
-    width: 70%;
-    margin: 0 auto;
-  } */
+
   .video-container1 {
-    /* position: absolute; */
     max-width: 600px;
     min-width: 600px;
     height: 100%;
-    /* background-color:blue;  */
-    /* overflow-y: scroll; */
-    /* margin-left: 9%; */
   }
 
   .video-container1 .video1 {
     min-width: 800px;
     min-height: 100%;
-    /* width: auto;
-    height: auto; */
-    /* overflow-y: scroll; */
   }
 
   .video-container1 .video2 {
@@ -273,17 +262,4 @@ button.chat-send-button {
     height: auto;
   }
 
-  /* .control {
-    margin-right: 9%;
-  } */
-  /* .video-container2 {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color:red;
-    width: 50%;
-    height: auto;
-    overflow: hidden;
-    z-index: 2;
-  } */
 }
