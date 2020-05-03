@@ -158,7 +158,7 @@ button.chat-send-button {
   top: 30px;
   width: 100%;
   overflow: hidden;
-  background-color: #00000014;
+  /* background-color: #00000014; */
   z-index: 3;
 }
 

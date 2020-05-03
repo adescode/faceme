@@ -23,7 +23,6 @@ let $inputMessage = $('.inputMessage'); // Input message input box
 let $usernameInput = $('.usernameInput'); // Input for username
 let $currentInput = $usernameInput.focus();
 
-
 //iceServers using numb.viagenie.ca for turn server
 let pcConfig = {
   iceServers: [
@@ -157,6 +156,8 @@ socket.on('created', function (room, id) {
 
 socket.on('full', function (room) {
   console.log('Room ' + room + ' is full');
+  alert('Room is not available try again');
+  window.location.reload();
 });
 
 socket.on('join', function (room) {
@@ -178,12 +179,13 @@ socket.on('log', function (array) {
 ////////////////////////////////////////////////
 
 function sendMessage(message) {
-  console.log('Client sending message: ', message);
-  socket.emit('message', message);
+  console.log('Client sending message: ', message, room.value);
+  socket.emit('message', { msg: message, room: room.value });
 }
 
 // This client receives a message
-socket.on('message', function (message) {
+socket.on('message', function (msg) {
+  const message = msg.msg;
   console.log('Client received message:', message);
   if (message === 'got user media') {
     maybeStart();
@@ -264,13 +266,15 @@ function maybeStart() {
 }
 
 window.onbeforeunload = function () {
-  sendMessage('bye');
+  if (pc) {
+    sendMessage('bye');
+  }
 };
 
-$(document).ready(function() {
-   $('.preloader').fadeOut('slow');
-   $loginPage.show()
-  });
+$(document).ready(function () {
+  $('.preloader').fadeOut('slow');
+  $loginPage.show();
+});
 
 /////////////////////////////////////////////////////////
 
@@ -368,7 +372,7 @@ function handleRemoteStreamAdded(event) {
   $('#messageDiv').css('display', 'flex');
   $('#timer').css('display', 'flex');
   $('#container').css('display', 'block');
-  
+
   startTimer();
 }
 
@@ -389,9 +393,9 @@ function handleRemoteHangup() {
 }
 
 function stop() {
-  closeButton.style.display = 'none';
-  window.location.reload();
   if (pc) {
+    closeButton.style.display = 'none';
+    window.location.reload();
     isStarted = false;
     pc.close();
     pc = null;
