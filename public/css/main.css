@@ -106,9 +106,6 @@ button.chat-send-button {
   width: auto;
   height: auto;
   padding: 0;
-  transform: rotateY(180deg) translate(25%, 0%);
-  -webkit-transform: rotateY(180deg) translate(25%, 0%);
-  -moz-transform: rotateY(180deg) translate(25%, 0%);
 }
 
 .video-container2, .video-container3 {
@@ -123,6 +120,12 @@ button.chat-send-button {
 }
 .video-container3 {
   right: 0;
+}
+
+.videoTransform {
+  transform: rotateY(180deg) translate(25%, 0%);
+  -webkit-transform: rotateY(180deg) translate(25%, 0%);
+  -moz-transform: rotateY(180deg) translate(25%, 0%);
 }
 
 .video-container2 .video2{

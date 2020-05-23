@@ -180,13 +180,16 @@ socket.on('log', function (array) {
 
 function sendMessage(message) {
   console.log('Client sending message: ', message, room.value);
-  socket.emit('message', { msg: message, room: room.value });
+  socket.emit('message', { msg: message, room: room.value, id: myID });
 }
 
 // This client receives a message
 socket.on('message', function (msg) {
   const message = msg.msg;
-  console.log('Client received message:', message);
+  console.log('Client received message:', msg);
+  if (msg.id === myID) {
+    return;
+  }
   if (message === 'got user media') {
     maybeStart();
   } else if (message.type === 'offer') {
@@ -369,6 +372,7 @@ function handleRemoteStreamAdded(event) {
   remoteVideo.srcObject = localStream;
   localVideo.srcObject = remoteStream;
   localVideo.muted = !localVideo.muted;
+  $('#remoteVideo').addClass('videoTransform');
   $('#messageDiv').css('display', 'flex');
   $('#timer').css('display', 'flex');
   $('#container').css('display', 'block');

@@ -58,7 +58,7 @@ function facePeer(ioSockets, socket) {
     // for a real app, would be room-only (not broadcast)
     ioSockets
       .in(message.room)
-      .emit('message', { msg: message.msg, room: message.room });
+      .emit('message', { msg: message.msg, room: message.room, id: message.id });
     // socket.broadcast.emit('message', message);
     // socket.emit('message', message);
   });
