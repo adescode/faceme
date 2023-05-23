@@ -6,7 +6,7 @@ var app = express();
 var path = require('path');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4000;
 const PROD = process.env.NODE_ENV === 'production';
 const router = express.Router();
 
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/', router);
 
 server.listen(port, () => {
-  console.log('Server listening at port %d', port);
+  console.log(`Serverlistening at http://localhost:${port}`);
 });
 
 // Routing
