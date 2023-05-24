@@ -8,6 +8,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 8080;
 const PROD = process.env.NODE_ENV === 'production';
+console.log("PROD", PROD);
 const router = express.Router();
 
 // Routing
@@ -31,11 +32,11 @@ server.listen(port, () => {
 });
 
 // Routing
-// if (PROD) {
+if (PROD) {
 app.use('/', express.static(path.join(__dirname, 'dist')));
-// }else{
-// app.use('/', express.static(path.join(__dirname, 'public')));
-// }
+}else{
+app.use('/', express.static(path.join(__dirname, 'public')));
+}
 
 io.sockets.on('connection', function (socket) {
   facePeer(io.sockets, socket);
