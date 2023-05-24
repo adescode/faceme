@@ -215,28 +215,12 @@ socket.on('message', function (msg) {
 ////////////////////////////////////////////////////
 
 function startDevices() {
-  // alert(`startdevices`);
-  if (!navigator.mediaDevices?.enumerateDevices) {
-    console.log("enumerateDevices() not supported.");
-    alert("enumerate")
-    navigator.permissions.query({ name: "geolocation" }).then((result) => {
-      if (result.state === "granted") {
-        alert("granted")
-      } else if (result.state === "prompt") {
-        alert("prompt")
-      } else {
-        alert(result.state);
-      }
-      // Don't do anything if the permission was denied.
-    });
-  }
   navigator.mediaDevices
     .getUserMedia({
       audio: true,
       video: true,
     })
     .then((stream) => {
-      alert('stream')
       gotStream(stream)
     })
     .catch(function (e) {
@@ -245,7 +229,6 @@ function startDevices() {
 }
 
 function gotStream(stream) {
-  alert(`local steaam`)
   console.log('Adding local stream.')
   localStream = stream
   localVideo.srcObject = stream
