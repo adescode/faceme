@@ -5,6 +5,6 @@ WORKDIR /
 COPY package.json ./
 RUN npm install --production
 COPY . .
-RUN npm run build
+# RUN npm run build
 CMD ["node", "index.js"]
 EXPOSE 8080
