@@ -7,12 +7,12 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "npm run build && node index.js",
     "start:dev": "nodemon index.js",
     "serve": "webpack && node index.js",
     "test": "node test.js",
     "livelog": "heroku logs --tail",
-    "build": "webpack"
+    "build": "webpack  --mode=production"
   },
   "dependencies": {
     "express": "^4.18.2",
