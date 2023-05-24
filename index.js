@@ -6,7 +6,7 @@ var app = express();
 var path = require('path');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 4000;
+var port = process.env.PORT || 8080;
 const PROD = process.env.NODE_ENV === 'production';
 const router = express.Router();
 
