@@ -4,7 +4,7 @@ FROM node:18-alpine
 WORKDIR /
 COPY package.json ./
 RUN npm install --production
-RUN npm install -g webpack
+RUN npm install -g webpack-cli
 COPY . .
 RUN npm run build
 CMD ["node", "index.js"]
